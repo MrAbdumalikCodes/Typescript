@@ -1,32 +1,23 @@
-enum deliveryStatus{
-    collecting = "collecting",
-    delivered = "delivered",
-    returned = "returned"
-} 
-class Product {
-    id:number;
-    status: string;
-    deliveryTime: Date
-    constructor(id:number,productStatus: string){
+class User{
+    private id:number
+    fullName: string
+    age:number
+    protected job:string
+    constructor(id:number,name:string,age:number,job:string){
         this.id = id
-        this.status = productStatus
-        this.deliveryTime = new Date() 
+        this.fullName = name
+        this.age = age
+        this.job = job
     }
-    time(){
-        console.log(`${new Date().getTime() - this.deliveryTime.getTime() + 2}`);
-        
-    }
-    delivered(){
-        if(this.status === 'collecting'){
-            console.log("The product is on its way 😴");
-        }else if(this.status === 'returned'){
-            console.log('An error occurred, the money has been refunded 😢');
-        }else if(this.status === 'delivered'){
-            console.log('Products have been successfully delivered 😉');
-        }
+    set firstName(firstName: string){
+        this.fullName = firstName
     }
 }
-let myProduct = new Product(2,'collecting')
-console.log(myProduct);
-myProduct.time()
-myProduct.delivered()
+class Student extends User{
+    some(){
+        super.fullName
+    }
+}
+let alex = new User(1,'Alex Smith',25,'Software Enginer')
+alex.firstName = 'Johny Cage'
+console.log(alex);
