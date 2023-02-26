@@ -6,9 +6,9 @@ var deliveryStatus;
     deliveryStatus["returned"] = "returned";
 })(deliveryStatus || (deliveryStatus = {}));
 class Product {
-    constructor(id) {
+    constructor(id, productStatus) {
         this.id = id;
-        this.status = deliveryStatus.collecting;
+        this.status = productStatus;
         this.deliveryTime = new Date();
     }
     time() {
@@ -16,12 +16,17 @@ class Product {
     }
     delivered() {
         if (this.status === 'collecting') {
-            throw new Error('Products have been successfully delivered');
+            console.log("The product is on its way 😴");
         }
-        this.status = deliveryStatus.returned;
+        else if (this.status === 'returned') {
+            console.log('An error occurred, the money has been refunded 😢');
+        }
+        else if (this.status === 'delivered') {
+            console.log('Products have been successfully delivered 😉');
+        }
     }
 }
-let myProduct = new Product(0);
+let myProduct = new Product(2, 'collecting');
 console.log(myProduct);
 myProduct.time();
 myProduct.delivered();
